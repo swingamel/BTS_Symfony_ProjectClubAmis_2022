@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+    {% block title %}
+        Inscription
+                
+    {% endblock %}
+{% block content %}
+    {% block body %}
+<body style="background-color: #e9edf2;"></br>
+        <div class="form-group">
+            {{ form_start(registrationForm) }}
+            <table class="table" style="width: 65%;position:absolute;top:160px; left:420px;">
+                <thead>
+                    <h2 style="text-align:center; position:absolute;top:90px;left:750px;">
+                        Inscription d'un ami                   
+                    </h2>
+                </br>
+            <th>
+                Informations de connexion                  
+            </th>
+            <tr>
+                <td>
+                    {{ form_label(registrationForm.email, 'Email :' ) }}
+                    {{ form_errors(registrationForm.email) }}
+                    {{ form_widget(registrationForm.email, {'attr':{'class':'form-control', 'placeholder' : 'Entrez l\'email' }}
+                            ) }}             
+                        </td>
+                    </br>
+                    <td>
+                        {{ form_label(registrationForm.plainPassword, 'Mot de passe :' ) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le mot de passe' }}
+                        ) }}
+                    </td>
+                </br>
+            </tr>
+                </br>
+                <th></br>
+                    Informations personnelles
+                </th>
+                <tr>
+                    <td>
+                        {{ form_label(registrationForm.nom, 'Nom :' ) }}
+                        {{ form_widget(registrationForm.nom, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le nom' }}
+                        ) }}
+                    </td>
+                </br>
+                <td>
+                    {{ form_label(registrationForm.prenom, 'Prénom :' ) }}
+                    {{ form_widget(registrationForm.prenom, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le prénom' }}
+                    ) }}
+                </td>
+            </tr>
+        </br>
+            <tr>
+                <td>
+                    {{ form_label(registrationForm.telFixe, 'Téléphone Fixe :' ) }}
+                    {{ form_errors(registrationForm.telFixe) }}
+                    {{ form_widget(registrationForm.telFixe, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le téléphone fixe' }}
+                    ) }}
+                </td>
+            </br>
+            <td>
+                {{ form_label(registrationForm.telPortable, 'Téléphone Portable :' ) }}
+                {{ form_errors(registrationForm.telPortable) }}
+                {{ form_widget(registrationForm.telPortable, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le téléphone portable' }}
+                ) }}
+            </td>
+        </tr>
+            </br>
+            <tr>
+                <td>
+                    {{ form_label(registrationForm.adresse, 'Adresse :' ) }}
+                    {{ form_widget(registrationForm.adresse, {'attr':{'class':'form-control', 'placeholder' : 'Entrez l\'adresse' }}
+                    ) }}                  
+                </td>
+            </br>
+            <td>
+                {{ form_label(registrationForm.ville, 'Ville :' ) }}
+                {{ form_widget(registrationForm.ville, {'attr':{'class':'form-control', 'placeholder' : 'Entrez la ville' }}
+                ) }}          
+            </td>
+        </tr>
+    <th></br>
+            Parrainages              
+        </th>
+        <tr>
+            {#(Attention, vous ne devez pas choisir deux parrainages identiques)#}
+            <td>
+                {{ form_label(registrationForm.amis1, '1er parrainage :' ) }}
+                {{ form_widget(registrationForm.amis1, {'attr':{'class':'form-control' }}
+                        ) }}
+                    </td>
+                </br>
+                <td>
+                    {{ form_label(registrationForm.amis2, '2ème parrainage :' ) }}
+                    {{ form_widget(registrationForm.amis2, {'attr':{'class':'form-control' }}
+                    ) }}
+                </td>
+            </br>
+        </tr>
+        <td>
+            <div style="position:absolute;top:583px; left:730px;"><button type="submit" class="btn btn-success">
+                Confirmer l'inscription !                  
+            </button>
+            <a class="btn btn-danger" href="{{ path('app_home')}}">
+            Annuler                     
+    </a>
+            </div>
+            <script>
+                $('select').on('change', function(){
+                    $('select option').prop("disabled", false);
+                    $("select").not(this).find("option[value="+ $(this).val() + "]").prop('disabled', true);
+                });
+            </script>
+        </td>
+        {{ form_end(registrationForm) }}
+    {% endblock %}
+{% endblock %}

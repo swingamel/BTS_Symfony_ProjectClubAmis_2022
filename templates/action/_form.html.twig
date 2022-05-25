@@ -1,0 +1,89 @@
+<div class="form-group">
+{{ form_start(form) }}
+<body style="background-color: #e9edf2;">
+<table class="table" style="width: 65%;position:absolute;top:220px; left:420px;">
+    <thead>
+                </br>
+            </br>
+            <tr>
+                <td>
+                    {{ form_label(form.nom, 'Nom de l\'action:' ) }}
+                    {{ form_widget(form.nom, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le nom de l\'action' }}
+                    ) }}             
+                                            
+                </td>
+            </tr>
+            </br>
+            <tr>
+                <td>
+                    {{ form_label(form.dateDebut, 'Date de démarrage de l\'action :' ) }}
+                        </br>
+                        {{ form_widget(form.dateDebut, {'attr':{'class':'js-datepicker form-control', 'placeholder' : 'Entrez la date de l\'action'}}
+                    ) }}
+                                        
+                </td>
+                <td>
+                    {{ form_label(form.duree, 'Durée de l\'action :' ) }}
+                        {{ form_widget(form.duree, {'attr':{'class':'form-control', 'placeholder' : 'Entrez la durée de l\'action' }}
+                    ) }}
+                                        
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h8>
+                    <B>Cette Action intervient avec une Commission ?</B>
+                    </h8>
+                </br>
+                    <select class='garantie form-control'>
+                        <option value=''>
+                            Choisir...
+                        </option>
+                        <option value='1'>
+                            Oui
+                        </option>
+                        <option value='0'>
+                            Non
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    {{ form_label(form.commission, 'Commission :' ) }}
+                    {{ form_widget(form.commission, {'attr':{'class':'fin_garentie form-control' }}
+                    ) }}
+                                        
+                </td>
+                {% block javascripts %}
+                    <script>
+                        $('.garantie').on('change', function() {
+                            if($(this).val() == 1)
+                            {
+                                $('.fin_garentie').prop('disabled', false);
+                            }else{
+                                $('.fin_garentie').prop('disabled', true);
+                            }
+                        });
+                    </script>
+                {% endblock %}
+            </tr>
+                <tr>
+                    <td>
+                        {{ form_label(form.amis, 'Amis responsable de l\'action : ' ) }}
+                        {{ form_widget(form.amis, {'attr':{'class':'multi_select w-100 form-control' }}
+                        ) }}              
+                    </td>
+
+            </tr>
+    </thead>
+</table>
+<div style="position:absolute;top:540px; left:1180px;"><button class="btn btn-success">
+        {{ button_label|default('Ajouter une action !') }}
+    </button>
+    <a type="button" class="btn btn-danger" href="/action">
+        Annuler
+    </a>
+</div>
+</div>
+</br>
+{{ form_end(form) }}
+</body>

@@ -1,0 +1,77 @@
+<div class="form-group">
+    {{ form_start(form) }}
+    <body style="background-color: #e9edf2;">
+    <table class="table" style="width: 65%;position:absolute;top:250px; left:420px;">
+        <thead>
+        </br>
+        </br>
+        <tr>
+            <td>
+                {{ form_label(form.action, 'Veuillez selectionner une action :' ) }}
+                {{ form_widget(form.action, {'attr':{'class':'form-control' }}) }}
+
+            </td>
+        </tr>
+        </br>
+        <tr>
+            <td>
+                {{ form_label(form.amis, 'Veuillez selectionner un amis :' ) }}
+                {{ form_errors(form.amis) }}
+                {{ form_widget(form.amis, {'attr':{'class':'multi_select w-100 form-control' }}
+                ) }}
+
+            </td>
+        </tr>
+        </thead>
+    </table>
+    <div style="position:absolute;top:430px; left:1120px;">
+        <button class="btn btn-success">
+            {{ button_label|default('Inscire un ami à une action !') }}
+        </button>
+        <a type="button" class="btn btn-danger" href="/inscription">
+            Annuler
+        </a>
+    </div>
+    </body>
+</div>
+</br>
+{{ form_end(form) }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        liste();
+    });
+    document.getElementById("inscription_action").addEventListener("change", function (){
+        liste();
+    })
+    function liste(){
+        var id = document.getElementById("inscription_action").selectedIndex;
+        var opts = document.getElementById("inscription_action").options[id].value;
+        var data = {
+            action: opts
+        }
+        let url = "../getAmis.php";
+        $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                dataType: 'html',
+                success: function (data) {
+                    var amis = JSON.parse(data);
+
+                    var opts = document.getElementById("inscription_amis").options;
+                    for (const option of opts) {
+                        option.disabled = true;
+                        let found = false;
+                        for (const ami of amis) {
+                            if (option.value === ami.id) {
+                                option.disabled = false;
+                            }
+                        }
+                    }
+
+                }
+            }
+        )
+    }
+</script>

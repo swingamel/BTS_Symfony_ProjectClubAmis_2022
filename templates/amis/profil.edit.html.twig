@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}{% block content %}
+<body style="background-color: #e9edf2;">
+<div class="form-group">
+	{{ form_start(form) }}
+	<table class="table" style="width: 65%;position:absolute;top:250px; left:420px;">
+		{% for message in app.flashes('modif') %}
+			<div class="alert alert-warning" style="width: 50%;text-align:center; position:absolute;top:190px; left:530px">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<thead>
+			<h2 style="text-align:center; position:absolute;top:120px;left:830px;">
+			Mon profil                   
+			</h2>
+			<tr>
+				<td>
+					{{ form_label(form.email, 'Email :' ) }}
+					{{ form_widget(form.email, {'attr':{'class':'form-control', 'placeholder' : 'Entrez l/email' }}
+					) }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{{ form_label(form.nom, 'Nom :' ) }}
+					{{ form_widget(form.nom, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le nom' }}
+					) }}
+				</td>
+				</br>
+				<td>
+					{{ form_label(form.prenom, 'Prénom :' ) }}
+					{{ form_widget(form.prenom, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le prenom' }}
+					) }}
+				</td>
+				</tr>
+			<tr>
+				<td>
+					{{ form_label(form.telFixe, 'Téléphone Fixe :' ) }}
+					{{ form_widget(form.telFixe, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le téléphone fixe' }}
+					) }}
+				</td>
+				</br>
+				<td>
+					{{ form_label(form.telPortable, 'Téléphone Portable :' ) }}
+					{{ form_widget(form.telPortable, {'attr':{'class':'form-control', 'placeholder' : 'Entrez le téléphone portable' }}
+					) }}
+				</td>
+				</tr>
+			<tr>
+				<td>
+					{{ form_label(form.adresse, 'Adresse :' ) }}
+					{{ form_widget(form.adresse, {'attr':{'class':'form-control', 'placeholder' : 'Entrez l\'adresse' }}
+					) }}
+				</td>
+				</br>
+				<td>
+					{{ form_label(form.ville, 'Ville :' ) }}
+					{{ form_widget(form.ville, {'attr':{'class':'form-control', 'placeholder' : 'Entrez la ville' }}
+					) }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{{ form_label(form.amis1, '1er parrainage :' ) }}
+					{{ form_widget(form.amis1, {'attr':{'class':'form-control' }}
+					) }}
+				</td>
+				</br>
+				<td>
+					{{ form_label(form.amis2, '2ème parrainage :' ) }}
+					{{ form_widget(form.amis2, {'attr':{'class':'form-control' }}
+					) }}
+				</td>
+			</tr>
+		</thead>
+	</table>
+	<div style="position:absolute;top:650px; left:1150px;"><button class="btn btn-success">
+			{{ button_label|default(' Valider la modification !') }}
+		</button>
+		<a type="button" class="btn btn-danger" href="{{ path('app_home')}}">
+			Annuler
+		</a>
+	</div>
+	<script>
+		$('select').on('change', function(){
+			$('select option').prop("disabled", false);
+			$("select").not(this).find("option[value="+ $(this).val() + "]").prop('disabled', true);
+		});
+	</script>
+</div>
+{{ form_end(form) }}
+{% endblock %}{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Action{% endblock %}
+
+{% block body %}
+    {% block content %}
+    <h1>Action</h1>
+
+
+
+    <a href="{{ path('app_action_index') }}">back to list</a>
+
+    <a href="{{ path('app_action_edit', {'id': action.id}) }}">edit</a>
+
+    {{ include('action/_delete_form.html.twig') }}
+{% endblock %}{% endblock %}
+

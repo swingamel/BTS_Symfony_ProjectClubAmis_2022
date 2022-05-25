@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Recherche
+{% endblock %}
+{% block body %}
+    {% block content %}
+    <body style="background-color: #e9edf2;" >
+        <h2 style="text-align:center; position:absolute;top:120px;left:590px;">
+            Consultation des inscriptions à des actions
+        </h2>
+    <table id="inscription" class="table table-hover" style="width: 60%;text-align:center; position:absolute;left:450px; top:250px;">
+        <thead>
+        <tr>
+            <th style="text-align:center">Nom de l'action</th>
+            <th style="text-align:center">Nom de l'amis</th>
+            <th colspan="3" rowspan="3" style="text-align:center">Choix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for inscription in inscriptions %}
+            <tr>
+                <td>
+                    {{ inscription.action }}
+                </td>
+                <td>
+                    {{ inscription.amis }}
+                </td>
+                <td>
+                    <form method="post" action="{{ path('app_inscription_delete', {'id': inscription.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription.id) }}">
+                        <button class="btn btn-danger">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+       </table>
+</div>
+</div>
+</div>
+</div>
+</body>{% endblock %}{% endblock %}

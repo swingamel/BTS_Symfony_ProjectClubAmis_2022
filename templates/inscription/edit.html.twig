@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Inscription{% endblock %}
+
+{% block body %}
+{% block content %}
+    <h2 style="text-align:center; position:absolute;top:120px;left:600px;">
+        Modifier l'inscription d'un ami à une action
+
+    </h2>
+
+    {{ include('inscription/_form.html.twig', {'button_label': 'Modifier l\'inscription d\'un ami !'}) }}
+{% endblock %}
+{% endblock %}

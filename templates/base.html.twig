@@ -1,19 +1,371 @@
-<!DOCTYPE html>
+<!--DOCTYPE html -->
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        <title>
+            {% block title %}
+                Welcome!
+                		
+            {% endblock %}
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="{{ asset('css/toto.css') }}" type="text/css" rel="stylesheet">
+        <script src="{{ asset('js/toto.js') }}"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.20.0/dist/bootstrap-table.min.css">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://unpkg.com/bootstrap-table@1.20.0/dist/bootstrap-table.min.js"></script>
+        <!-- Latest compiled and minified Locales -->
+        <script src="https://unpkg.com/bootstrap-table@1.20.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
+        <script>
+            jQuery(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                minDate: 0
+            });
+            });
+        </script>
     </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>
+                    Le club des amis              
+                </h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{{ path('app_home') }}">
+                        Accueil                 
+                    </a>
+                </li>
+                {% if is_granted('ROLE_SECRETAIRE') %}
+                    <li>
+                        <a href="#amis" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion des amis                     
+                        </a>
+                        <ul class="collapse list-unstyled" id="amis">
+                            <li>
+                                <a href="{{ path('app_register') }}">
+                                    Création d'un amis                                 
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('amis_consultation') }}">
+                                    Consultation des amis                                
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#actions" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion des Actions                        
+                        </a>
+                        <ul class="collapse list-unstyled" id="actions">
+                            <li>
+                                <a href="{{ path('app_action_new') }}">
+                                    Création d’une action                                
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_action_index')}}">
+                                    Consultation des actions                               
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_inscription_new')}}">
+                                    Inscription d’un ami à une action                               
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_inscription_index')}}">
+                                Consultation des membres de l’action
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#diners" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion des dîners (pas géré)
+                        </a>
+                        <ul class="collapse list-unstyled" id="diners">
+                            <li>
+                                <a href="#">
+                                    Création d’un dîner                                   
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultant des dîners
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Inscription à un dîner                                  
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation des participants à un dîner                             
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#bureau" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion du bureau et des commissions (pas géré)
+                        </a>
+                        <ul class="collapse list-unstyled" id="bureau"> 
+                            <li>
+                                <a href="#">
+                                    Saisie du bureau                             
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation des bureaux
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Création d’une commission                              
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation d’une commission
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Inscription à une commission
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation des membres de la commission                             
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_TRESORIER') %}
+                    <li class="active">
+                        <a href="#finance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion financière (pas géré)
+                        </a>
+                        <ul class="collapse list-unstyled" id="finance">
+                            <li>
+                                <a href="#">
+                                    Saisie de la cotisation annuelle                                   
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Edition du relevé annuel                                  
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Saisie du règlement d’un amis                                   
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_PRESIDENT') %}
+                    <li class="active">
+                        <a href="#amis" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion des amis                         
+                        </a>
+                        <ul class="collapse list-unstyled" id="amis">
+                            <li>
+                                <a href="{{ path('app_register') }}">
+                                    Création d'un amis                                
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('amis_consultation') }}">
+                                    Consultation des amis                                  
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#actions" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion des Actions                         
+                        </a>
+                        <ul class="collapse list-unstyled" id="actions">
+                            <li>
+                                <a href="{{ path('app_action_new') }}">
+                                    Saisie d’une action                                 
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_action_index')}}">
+                                    Consultation des actions                               
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_inscription_new')}}">
+                                    Inscription d’un ami à une action                               
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_inscription_index')}}">
+                                Consultation des membres de l’action
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#diners" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion des dîners (pas géré)
+                        </a>
+                        <ul class="collapse list-unstyled" id="diners">
+                            <li>
+                                <a href="#">
+                                    Création d’un dîner
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultant des dîners
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Inscription à un dîner
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation des participants à un dîner
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#bureau" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion du bureau et des commissions (pas géré)
+                        </a>
+                        <ul class="collapse list-unstyled" id="bureau">
+                            <li>
+                                <a href="#">
+                                    Saisie du bureau
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation des bureaux
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Création d’une commission
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation d’une commission
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Inscription à une commission
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Consultation des membres de la commission
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#finance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            Gestion financière (pas géré)
+                        </a>
+                        <ul class="collapse list-unstyled" id="finance">
+                            <li>
+                                <a href="#">
+                                    Saisie de la cotisation annuelle
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Edition du relevé annuel
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Saisie du règlement d’un amis
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            </br></br>
+                    <li>
+                        <a href="{{ path('app_logout') }}">
+                            <i class="fa-thin fa-right-from-bracket"></i>Déconnexion
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('amis_edit') }}">
+                        Mon Profil
+                        </a>
+                    </li>
+                
+                {% else %}
+                    <li>
+                        <a href="{{ path('app_login') }}">
+                            Se connecter                           
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <ul class="list-unstyled CTAs"></ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>
+                            👈 Menu principal
+                        </span>
+                    </button>
+                    <ul class="nav navbar-nav navbar-right">
+                        <B>
+                            {% if app.user %}
+                                Vous êtes connecté en tant que 
+                                                                
+                                {{ app.user.prenom }} {{ app.user.nom }} ({{app.user.roles[0] }})
+                            {% endif %}
+                        </B>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    {% block content %}{% endblock content %}
 </html>
